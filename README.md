@@ -1,7 +1,7 @@
 # tic-tac-toe
 
 Exactly what the title say, a tic-tac-toe browser game.
-Might implement Ai or Multiplayer functionality later.
+As of now, the cpu only choses a random spot so it's not considered an AI, might implement AI or Multiplayer functionality later.
 
 
 ## run
