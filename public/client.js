@@ -59,6 +59,11 @@ const CPUplay = () => {
         alert("CPU won!");
         return resetGame();
     }
+    // check for tie
+    if(checkForTie()) {
+        alert("Tie!");
+        return resetGame();
+    }
 }
 
 
@@ -151,7 +156,7 @@ const checkForWin = (pos, player) => {
         diagonalIndexes = rightDiagonal;
     }
     else { // otherwise we set diagonalIndexes to diagonal indexes the cell belongs to
-        diagonalIndexes = leftDiagonal.includes(pos) ? rightDiagonal : leftDiagonal;
+        diagonalIndexes = leftDiagonal.includes(pos) ? leftDiagonal : rightDiagonal;
     }
     // get the actual diagonal from the diagonalIndexes
     const diagonal = cells.flat().filter((_, i) => diagonalIndexes.includes(i));
@@ -166,6 +171,18 @@ const checkForWin = (pos, player) => {
     if(checks.every(x => x)) return true;
     // no win
     return false;
+}
+
+
+
+// check for tie
+const checkForTie = () => {
+    for(let i = 0; i < cells.length; i++) {
+        for(let j = 0; j < cells[0].length; j++) {
+            if(cells[i][j].checked === false) return false;
+        }
+    }
+    return true;
 }
 
 
@@ -187,6 +204,11 @@ for(let x of cells) {
             // check for a win ---- checkForWin takes the position of the cell in the square as an argument
             if(checkForWin(x.indexOf(cell) + cells.indexOf(x)*3, 1)) {
                 alert("You won!");
+                return resetGame();
+            }
+            // check for tie
+            if(checkForTie()) {
+                alert("Tie!");
                 return resetGame();
             }
             // CPU's round
